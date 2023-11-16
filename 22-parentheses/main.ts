@@ -1,33 +1,40 @@
 // https://leetcode.com/problems/generate-parentheses/?envType=study-plan-v2&envId=top-100-liked
 
-const prepend = (x:string) => `()${x}`;
-const append = (x: string) => `${x}()`;
-const nest = (x: string) => `(${x})`;
-
 function generateParenthesis(n: number): string[] {
-	if ( n === 0 ) return [];
+	let results: string[] = [""];
 
-	let parens: string[] = ["()"];
+	for (let i = 0; i < 2*n; ++i) {
+		const newResults = results.flatMap(result => {
+			let open = 0;
+			let closed = 0;
 
-	for (let i = 1; i < n; ++i) {
-		const foo = parens.flatMap(x => ([
-			prepend(x),
-			append(x),
-			nest(x)
-		]));
+			for (const letter of result) {
+				if (letter === "(") open++;
+				if (letter === ")") closed++;
+			}
 
-		parens = Array.from(new Set(foo));
+			let foo:string[] = [];
+
+			if (open < n) foo.push(result + "(");
+			if (open > closed) foo.push(result + ")");
+
+			return foo;
+		});
+
+		results = newResults;
 	}
 
-	return parens;
-
+	return results;
 };
-// The (())(()) case is missing for n = 4
+
+console.log(generateParenthesis(2));
+
 const out = generateParenthesis(4);
-const correct = ["(((())))","((()()))","((())())","((()))()","(()(()))","(()()())","(()())()","(())(())","(())()()","()((()))","()(()())","()(())()","()()(())","()()()()"]
+const correct = ["(((())))", "((()()))", "((())())", "((()))()", "(()(()))", "(()()())", "(()())()", "(())(())", "(())()()", "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"]
 
 for (let a of correct) {
 	if (!out.includes(a)) {
 		console.log(a);
 	}
 }
+
