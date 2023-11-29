@@ -11,12 +11,7 @@
  *     }
  * }
  */
-
-type TreeNode = {
-	val: number;
-	left: TreeNode | null;
-	right: TreeNode | null;
-}
+import deserialiseTree from '../utils/binary-tree';
 
 function recurse(node: TreeNode | null, depth: number): number {
 	if (node === null) return depth;
@@ -31,39 +26,13 @@ function maxDepth(root: TreeNode | null): number {
 	return recurse(root, 0);
 };
 
-const tree1 = {
-	val: 3,
-	left: {
-		val: 9,
-		left: null,
-		right: null,
-	},
-	right: {
-		val: 20,
-		left: {
-			val: 15,
-			left: null,
-			right: null,
-		},
-		right: {
-			val: 7,
-			left: null,
-			right: null,
-		},
-	},
-};
+const case1 = [3, 9, 20, null, null, 15, 7];
+const case2 = [1, null, 2];
+const case3 = [];
 
-const tree2 = {
-	val: 1,
-	left: null,
-	right: {
-		val: 2,
-		left: null,
-		right: null,
-	},
-};
-
-const tree3: SerialisedTree = [];
+const tree1 = deserialiseTree(case1);
+const tree2 = deserialiseTree(case2);
+const tree3 = deserialiseTree(case3);
 
 const expected1 = 3;
 const expected2 = 2;
