@@ -3,6 +3,7 @@ function isValid(s: string): boolean {
 
 	for (let i = 0; i < s.length; ++i) {
 		const c = s.charAt(i);
+
 		if (["(","{","["].includes(c)) {
 			stack.push(c)
 		}
@@ -17,7 +18,6 @@ function isValid(s: string): boolean {
 	}
 
 	return stack.length === 0;	
-
 }
 
 
