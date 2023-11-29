@@ -12,34 +12,68 @@
  * }
  */
 
- type TreeNode = {
+type TreeNode = {
 	val: number;
 	left: TreeNode | null;
 	right: TreeNode | null;
- }
+}
 
- type SerialisedTree = (number | null)[];
+function recurse(node: TreeNode | null, depth: number): number {
+	if (node === null) return depth;
 
-function maxDepth(root: SerialisedTree | null): number {
-    if (root === null) return 0;
-    
-	
-	return -1;
+	const leftDepth = recurse(node.left, depth + 1);
+	const rightDepth = recurse(node.right, depth + 1);
+
+	return Math.max(leftDepth, rightDepth);
+}
+
+function maxDepth(root: TreeNode | null): number {
+	return recurse(root, 0);
 };
 
-const case1: SerialisedTree = [3, 9, 20, null, null, 15, 7];
-const case2: SerialisedTree = [1, null, 2];
-const case3: SerialisedTree = [];
+const tree1 = {
+	val: 3,
+	left: {
+		val: 9,
+		left: null,
+		right: null,
+	},
+	right: {
+		val: 20,
+		left: {
+			val: 15,
+			left: null,
+			right: null,
+		},
+		right: {
+			val: 7,
+			left: null,
+			right: null,
+		},
+	},
+};
+
+const tree2 = {
+	val: 1,
+	left: null,
+	right: {
+		val: 2,
+		left: null,
+		right: null,
+	},
+};
+
+const tree3: SerialisedTree = [];
 
 const expected1 = 3;
 const expected2 = 2;
 const expected3 = 0;
 
-const result1 = maxDepth(case1);	
-const result2 = maxDepth(case2);
-const result3 = maxDepth(case3);
+const result1 = maxDepth(tree1);
+const result2 = maxDepth(tree2);
+const result3 = maxDepth(tree3);
 
-console.log({result1, expected1});
-console.log({result2, expected2});
-console.log({result3, expected3});
+console.log({ result1, expected1 });
+console.log({ result2, expected2 });
+console.log({ result3, expected3 });
 
