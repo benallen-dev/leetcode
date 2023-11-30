@@ -1,9 +1,4 @@
-// type TreeNode = {
-// 	val: number;
-// 	left: TreeNode | null;
-// 	right: TreeNode | null;
-// }
-//
+export type SerializedTree = (number | null)[];
 
 export class TreeNode {
   val: number;
@@ -16,7 +11,12 @@ export class TreeNode {
   }
 }
 
-function deserializeBinaryTree(data: (number | null)[]): TreeNode | null {
+export function serializeBinaryTree(tree: TreeNode | null): SerializedTree {
+
+	return []
+}
+
+export function deserializeBinaryTree(data: SerializedTree): TreeNode | null {
   if (data.length === 0) return null;
 
   const root = new TreeNode(data.shift() as number);
@@ -40,5 +40,3 @@ function deserializeBinaryTree(data: (number | null)[]): TreeNode | null {
 
   return root;
 }
-
-export default deserializeBinaryTree;

@@ -1,4 +1,8 @@
-import deserializeBinaryTree, { type TreeNode } from "../utils/binary-tree";
+import {
+	deserializeBinaryTree,
+	type TreeNode,
+	type SerializedTree 
+} from "../utils/binary-tree";
 
 function traverse(node: TreeNode | null, result: number[] = []) {
 	if (node === null) return result;
@@ -14,7 +18,7 @@ function inorderTraversal(root: TreeNode | null): number[] {
 	return traverse(root, []);
 };
 
-const testCases: [(number | null)[], number[]][] = [
+const testCases: [SerializedTree, number[]][] = [
 	[[1, null, 2, 3], [1, 3, 2]],
 	[[], []],
 	[[1], [1]],
