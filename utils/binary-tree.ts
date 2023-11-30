@@ -13,7 +13,35 @@ export class TreeNode {
 
 export function serializeBinaryTree(tree: TreeNode | null): SerializedTree {
 
-	return []
+	const q = [tree];
+	let result: SerializedTree = [];
+
+	while(q.length) {
+		const node = q.shift();
+		if (!node) {
+			continue;
+		}
+
+		result.push(node.val);
+		if (!node.left && !node.right) {
+			continue;
+		}
+
+		if (node.left) {
+			q.push(node.left);
+		} else {
+			result.push(null);
+		}
+
+		if (node.right) {
+			q.push(node.right);
+		} else {
+			result.push(null);
+		}
+	};
+
+	return result;
+
 }
 
 export function deserializeBinaryTree(data: SerializedTree): TreeNode | null {
