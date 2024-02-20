@@ -8,3 +8,4 @@ PS: After doing a couple I notice two things:
 
 1. Leetcode doesn't feel like day-to-day software development
 2. I am not as good at leetcode as I thought I would be
+3. Still kinda fun though
